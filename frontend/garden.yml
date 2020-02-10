@@ -1,0 +1,19 @@
+kind: Module
+description: The frontend
+type: helm
+name: frontend
+base: base-chart
+serviceResource:
+  containerModule: frontend-image
+values:
+  name: frontend
+  containerPort: 8080
+  image:
+    repository: ${modules.frontend-image.outputs.deployment-image-name}
+    tag: ${modules.frontend-image.version}
+  ingress:
+    enabled: true
+    paths:
+      - /hello-frontend
+      - /call-backend
+    hosts: [frontend.local.app.garden]

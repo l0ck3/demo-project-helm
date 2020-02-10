@@ -1,0 +1,5 @@
+kind: Module
+name: frontend-image
+description: Frontend service container
+type: container
+

@@ -1,0 +1,17 @@
+kind: Module
+description: The backend
+type: helm
+name: backend
+base: base-chart
+serviceResource:
+  containerModule: backend-image
+values:
+  name: backend
+  containerPort: 8080
+  image:
+    repository: ${modules.backend-image.outputs.deployment-image-name}
+    tag: ${modules.backend-image.version}
+  ingress:
+    enabled: true
+    paths: [/]
+    hosts: [backend.local.app.garden]
